@@ -1,10 +1,17 @@
 import { Component } from '@angular/core';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'angular-material-theme';
+  isChecked: boolean = false;
+  mode: string = 'nightlight_round';
+
+  changed(event: MatSlideToggleChange): void {
+    this.mode = event.checked ? 'nightlight_round' : 'light_mode';
+    document.body.classList.toggle('dark-theme');
+  }
 }
