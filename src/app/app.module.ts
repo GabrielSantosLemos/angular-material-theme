@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { CardModule } from './components/card/card.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatSlideToggleModule,
     MatInputModule,
     MatIconModule,
+    CardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
