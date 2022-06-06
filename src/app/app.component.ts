@@ -1,5 +1,11 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, HostBinding, Inject, Renderer2 } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  Inject,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
@@ -7,18 +13,34 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  private _iconLight = 'light_mode';
+  private _iconDark = 'nightlight_round';
+  private _themeLightClass = 'theme-light';
+  private _themeDarkClass = 'theme-dark';
+  private _hostThemeClass = '';
   isChecked: boolean = false;
-  mode: string = 'nightlight_round';
+  iconThemeMode: string = '';
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2
   ) {}
 
-  changed(event: MatSlideToggleChange): void {
-    this.mode = event.checked ? 'nightlight_round' : 'light_mode';
-    const hostClass = this.isChecked ? 'theme-dark' : 'theme-light';
-    //this.renderer.setAttribute(this.document.body, 'class', hostClass);
+  ngOnInit(): void {
+    this.iconThemeMode = this.isChecked ? this._iconDark : this._iconLight;
+    this._hostThemeClass = this.isChecked
+      ? this._themeDarkClass
+      : this._themeLightClass;
+    this.renderer.addClass(this.document.body, this._hostThemeClass);
+  }
+
+  mudarThema(event: MatSlideToggleChange): void {
+    this.renderer.removeClass(this.document.body, this._hostThemeClass);
+    this.iconThemeMode = event.checked ? this._iconDark : this._iconLight;
+    this._hostThemeClass = this.isChecked
+      ? this._themeDarkClass
+      : this._themeLightClass;
+    this.renderer.addClass(this.document.body, this._hostThemeClass);
   }
 }

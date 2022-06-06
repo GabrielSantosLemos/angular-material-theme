@@ -2,6 +2,7 @@
 
 @include mat.core();
 
+@import "/src/app/app.component.theme.scss";
 @import "/src/app/components/card/card.component.theme.scss";
 
 $angular-material-theme-primary: mat.define-palette(mat.$indigo-palette);
@@ -30,10 +31,12 @@ $theme-dark: mat.define-dark-theme(
 
 .theme-light {
   @include mat.all-component-themes($theme-light);
+  @include app-root-theme($theme-light);
   @include card-theme($theme-light);
 }
 
 .theme-dark {
   @include mat.all-component-themes($theme-dark);
+  @include app-root-theme($theme-dark);
   @include card-theme($theme-dark);
 }
